@@ -1,9 +1,16 @@
-<% @espera = Corrida.find_by_id(@corrida.id) %>
+<% @espera = @corrida %>
+
+<script>
+    var refreshIntervalId = setInterval(function(){ location.reload(); }, 3000);
+</script>
 
 <% if @espera.driver_id == nil %>
 <h1><%= Client.find_by_id(current_user.meta_id).name %>, aguarde ser atendido...</h1>
 
 <% else  %>
+<script>
+clearInterval(refreshIntervalId);
+</script>
 	<h1><%= Client.find_by_id(current_user.meta_id).name %>, você foi atendido</h1>
 	<table>
 	  <thead>
@@ -21,5 +28,3 @@
 	  </tbody>
 	</table>
 <% end %>
-
-
