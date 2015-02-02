@@ -15,17 +15,7 @@ class CorridasController < ApplicationController
 	@corrida.update(corrida_params)
   end
   
-    def destroy
-    @corrida = Corrida.find params[:id]
-    @corrida.destroy
-    redirect_to drivers_url, notice: 'Client was successfully destroyed.'
-  end
-  
-  def reload
-	@corrida = Corrida.find params[:id]
-	render :partial => 'dynamic', :object => @corrida
-  end
-  
+ 
   def corrida_params
       params.permit(:id, :client_id, :driver_id, :address)
     end
