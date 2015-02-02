@@ -13,13 +13,13 @@
   
   <div class="row" style="text-align: left;">
   	
-  <div class="col-lg-6">
-    <%= f.label :name %><br>
+   <div class="col-lg-6">
+    <%= f.label :"Nome:" %><br>
     <%= f.text_field :name %>
   </div>
   
   <div class="col-lg-6">
-    <%= f.label :phone %><br>
+    <%= f.label :"Fone:" %><br>
     <%= f.telephone_field :phone %>
   </div>
   
@@ -31,18 +31,18 @@
   		</div>
   		
   		<div class="col-lg-6">
-  			<%= u.label :password %><br>
+  			<%= u.label :"Senha:" %><br>
 			<%= u.password_field :password %>
   		</div>
   		
   		<div class="col-lg-6">
-  			<%= u.label :password_confirmation %><br>
+  			<%= u.label :"Confirme a senha:" %><br>
 			<%= u.password_field :password_confirmation %>
   		</div>		
   	<% end %>  	
   		
   <div class="col-lg-12" style="margin: 10px 0px; text-align: left;">
-    	<%= f.submit "Submit", :class=>"btn btn-info" %>
+    	<%= f.submit "Enviar", :class=>"btn btn-info" %>
   	</div>
   
 </div>
