@@ -16,10 +16,5 @@
 //= require_tree .
 
  
-$(document).ready(
-         function() {
-          setInterval(function() {
-            $('.dynamic').load('/corridas/reload');
-        }, 3000);
-    });
+
 

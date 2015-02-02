@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	get "/corridas/reload" => "corridas#reload"
+	get "/corridas/reload/:id" => "corridas#reload"
 
   devise_for :users, :skip => [:registrations]
 

@@ -10,12 +10,14 @@
   </thead>
   <tbody>
     <% @drivers.each do |corrida| %>
+	  <% if corrida.driver_id == nil %>
       <tr>
         <td><%= corrida.address %></td>
         <td><%=	 form_tag corrida_path(corrida.id), :method => :put do %>
         <%= hidden_field_tag "driver_id", current_user.meta_id %>
         <%= submit_tag 'Atender' %><% end %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

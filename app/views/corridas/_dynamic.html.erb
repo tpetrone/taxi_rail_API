@@ -1,15 +1,9 @@
-
-
-
-<% @espera = Corrida.find_by(client_id: current_user.meta_id) %>
-
+<% @espera = Corrida.find_by_id(@corrida.id) %>
 
 <% if @espera.driver_id == nil %>
 <h1><%= Client.find_by_id(current_user.meta_id).name %>, aguarde ser atendido...</h1>
-driver : <%= @espera.driver_id %>
 
 <% else  %>
-
 	<h1><%= Client.find_by_id(current_user.meta_id).name %>, você foi atendido</h1>
 	<table>
 	  <thead>

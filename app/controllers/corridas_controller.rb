@@ -2,10 +2,13 @@ class CorridasController < ApplicationController
 
   def create
 	@corrida = Corrida.new(corrida_params)
-	@corrida.save
-
-	
+	@corrida.save	
+	redirect_to action: "show", id: @corrida.id
   end
+
+	def show
+	@corrida = Corrida.find params[:id]
+	end
 
   def update
 	@corrida = Corrida.find params[:id]
@@ -19,7 +22,8 @@ class CorridasController < ApplicationController
   end
   
   def reload
-	render :partial => "dynamic" 
+	@corrida = Corrida.find params[:id]
+	render :partial => 'dynamic', :object => @corrida
   end
   
   def corrida_params
