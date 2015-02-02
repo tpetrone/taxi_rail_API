@@ -1,0 +1,31 @@
+
+
+
+<% @espera = Corrida.find_by(client_id: current_user.meta_id) %>
+
+
+<% if @espera.driver_id == nil %>
+<h1><%= Client.find_by_id(current_user.meta_id).name %>, aguarde ser atendido...</h1>
+driver : <%= @espera.driver_id %>
+
+<% else  %>
+
+	<h1><%= Client.find_by_id(current_user.meta_id).name %>, você foi atendido</h1>
+	<table>
+	  <thead>
+		<tr>
+		  <th>Motorista</th>
+		  <th>Carro</th>
+		</tr>
+	  </thead>
+
+	  <tbody>
+		  <tr>
+			<td><%= Driver.find_by_id(@espera.driver_id).name %></td>
+			<td><%= Driver.find_by_id(@espera.driver_id).car_model %></td>
+		  </tr>
+	  </tbody>
+	</table>
+<% end %>
+
+

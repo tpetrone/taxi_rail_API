@@ -1,0 +1,2 @@
+$('#partial').replaceWith("<%= escape_javascript(render :partial => 'dynamic') %>");
+

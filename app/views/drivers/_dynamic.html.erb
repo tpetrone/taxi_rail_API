@@ -1,0 +1,35 @@
+
+Corridas disponíveis:
+
+<table>
+  <thead>
+    <tr>
+      <th>Endereço:</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drivers.each do |corrida| %>
+      <tr>
+        <td><%= corrida.address %></td>
+
+
+
+
+        
+        <td><%=	 form_tag corrida_path(corrida.id), :method => :put do %>
+        <%= hidden_field_tag "driver_id", current_user.meta_id %>
+        <%= submit_tag 'Atender' %><% end %></td>
+        
+        
+        
+        
+        
+        
+
+        <td><%= link_to 'Destroy', corrida_path(corrida.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

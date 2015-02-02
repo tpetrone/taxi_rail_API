@@ -1,0 +1,6 @@
+$(document).ready(
+         function() {
+          setInterval(function() {
+            $('.dynamic').load('/controller_name/action_name');
+        }, 3000);
+    });
