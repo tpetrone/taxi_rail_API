@@ -11,7 +11,10 @@
 
 <body>
 	
-
+<% if notice.present? || alert.present? %>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+<% end %>
 
 <%= yield %>
 <div id="user_nav">
@@ -27,6 +30,7 @@
     <%= link_to "Registre-se como um MOTORISTA", new_driver_path, :method => :get %>
   <% end %>
 </div>
+
 
 
 </body>
