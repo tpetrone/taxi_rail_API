@@ -12,10 +12,10 @@ Getting_started:
 #############################################
 
 Dependencies:
-	$ echo "gem 'devise'" >> Gemfile
+`	$ echo "gem 'devise'" >> Gemfile
 	$ echo "gem 'omniauth'" >> Gemfile
 	$ bundle install
-	$ rails generate devise:install
+	$ rails generate devise:install`
 
 #############################################
 
