@@ -24,15 +24,15 @@ Dependencies:
 
 Models:
 
-rails g devise User
-rails g devise:views 
-rails g migration add_meta_to_users meta_id:integer meta_type
-rails g scaffold Client name phone lat:float lng:float
-rails g scaffold Driver name phone car_model lat:float lng:float
-rails g model Corrida client_id:integer driver_id:integer address
-rails g controller Corridas create update
-rails g controller welcome index
-rake db:migrate
+  rails g devise User
+  rails g devise:views 
+  rails g migration add_meta_to_users meta_id:integer meta_type
+  rails g scaffold Client name phone lat:float lng:float
+  rails g scaffold Driver name phone car_model lat:float lng:float
+  rails g model Corrida client_id:integer driver_id:integer address
+  rails g controller Corridas create update
+  rails g controller welcome index
+  rake db:migrate
 
 #############################################
 #############################################
@@ -41,42 +41,42 @@ Migration
 //
 ActiveRecord::Schema.define(version: 20140818105408) do
 
-  create_table "clients", force: true do |t|
-    t.string   "name"
-    t.integer  "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "drivers", force: true do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.string   "car_model"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "meta_id"
-    t.string   "meta_type"
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["meta_id", "meta_type"], name: "index_users_on_meta_id_and_meta_type"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-end
+        create_table "clients", force: true do |t|
+          t.string   "name"
+          t.integer  "phone"
+          t.datetime "created_at"
+          t.datetime "updated_at"
+        end
+      
+        create_table "drivers", force: true do |t|
+          t.string   "name"
+          t.string   "phone"
+          t.string   "car_model"
+          t.datetime "created_at"
+          t.datetime "updated_at"
+        end
+      
+        create_table "users", force: true do |t|
+          t.string   "email",                  default: "", null: false
+          t.string   "encrypted_password",     default: "", null: false
+          t.string   "reset_password_token"
+          t.datetime "reset_password_sent_at"
+          t.datetime "remember_created_at"
+          t.integer  "sign_in_count",          default: 0,  null: false
+          t.datetime "current_sign_in_at"
+          t.datetime "last_sign_in_at"
+          t.string   "current_sign_in_ip"
+          t.string   "last_sign_in_ip"
+          t.datetime "created_at"
+          t.datetime "updated_at"
+          t.integer  "meta_id"
+          t.string   "meta_type"
+      
+        add_index "users", ["email"], name: "index_users_on_email", unique: true
+        add_index "users", ["meta_id", "meta_type"], name: "index_users_on_meta_id_and_meta_type"
+        add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+      
+      end
 
 #################
 class User < ActiveRecord::Base
