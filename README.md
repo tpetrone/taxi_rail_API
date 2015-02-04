@@ -38,7 +38,7 @@ rake db:migrate
 #############################################
 Migration
 
-
+//
 ActiveRecord::Schema.define(version: 20140818105408) do
 
   create_table "clients", force: true do |t|
