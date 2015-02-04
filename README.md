@@ -6,33 +6,33 @@
 #############################################
 ##########################################################################################
 Getting_started:
-*	$ rails new taxi
-*	$ cd taxi
+  *	$ rails new taxi
+  *	$ cd taxi
 
 #############################################
 
 Dependencies:
->	$ echo "gem 'devise'" >> Gemfile
-
->	$ echo "gem 'omniauth'" >> Gemfile
-
->	$ bundle install
-
->	$ rails generate devise:install
+  >	$ echo "gem 'devise'" >> Gemfile
+  
+  >	$ echo "gem 'omniauth'" >> Gemfile
+  
+  >	$ bundle install
+  
+  >	$ rails generate devise:install
 
 #############################################
 
 Models:
 
-  rails g devise User
-  rails g devise:views 
-  rails g migration add_meta_to_users meta_id:integer meta_type
-  rails g scaffold Client name phone lat:float lng:float
-  rails g scaffold Driver name phone car_model lat:float lng:float
-  rails g model Corrida client_id:integer driver_id:integer address
-  rails g controller Corridas create update
-  rails g controller welcome index
-  rake db:migrate
+      rails g devise User
+      rails g devise:views 
+      rails g migration add_meta_to_users meta_id:integer meta_type
+      rails g scaffold Client name phone lat:float lng:float
+      rails g scaffold Driver name phone car_model lat:float lng:float
+      rails g model Corrida client_id:integer driver_id:integer address
+      rails g controller Corridas create update
+      rails g controller welcome index
+      rake db:migrate
 
 #############################################
 #############################################
