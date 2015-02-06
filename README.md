@@ -39,8 +39,7 @@ Models:
 Migration
 
 //
-ActiveRecord::Schema.define(version: 20140818105408) do
-
+      ActiveRecord::Schema.define(version: 20140818105408) do
         create_table "clients", force: true do |t|
           t.string   "name"
           t.integer  "phone"
@@ -81,33 +80,33 @@ ActiveRecord::Schema.define(version: 20140818105408) do
 Classes:
 
 
-  class User < ActiveRecord::Base
-    # Include default devise modules. Others available are:
-    # :confirmable, :lockable, :timeoutable and :omniauthable
-    devise :database_authenticatable, :registerable,
-           :recoverable, :rememberable, :trackable, :validatable
-           
-  belongs_to :meta, polymorphic: true 
+      class User < ActiveRecord::Base
+        # Include default devise modules. Others available are:
+        # :confirmable, :lockable, :timeoutable and :omniauthable
+        devise :database_authenticatable, :registerable,
+               :recoverable, :rememberable, :trackable, :validatable
+               
+      belongs_to :meta, polymorphic: true 
+        
+      end
     
-  end
-
-  class Client < ActiveRecord::Base
-    has_one :user, as: :meta, dependent: :destroy
-    accepts_nested_attributes_for :user
+      class Client < ActiveRecord::Base
+        has_one :user, as: :meta, dependent: :destroy
+        accepts_nested_attributes_for :user
+        
+        validates :name, presence: true
+        validates :phone, presence: true
+      
+      end
     
-    validates :name, presence: true
-    validates :phone, presence: true
-  
-  end
-
-  class Driver < ActiveRecord::Base
-    has_one :user, as: :meta, dependent: :destroy
-    accepts_nested_attributes_for :user
-    
-    validates :name, presence: true
-    validates :phone, presence: true
-  validates :car_model presence: true
-  end
+      class Driver < ActiveRecord::Base
+        has_one :user, as: :meta, dependent: :destroy
+        accepts_nested_attributes_for :user
+        
+        validates :name, presence: true
+        validates :phone, presence: true
+      validates :car_model presence: true
+      end
 
 ##########################################
 Controllers:
