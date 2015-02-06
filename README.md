@@ -78,117 +78,117 @@ ActiveRecord::Schema.define(version: 20140818105408) do
       
       end
 
-#################
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-         
-belongs_to :meta, polymorphic: true 
-  
-end
+  #################
+    class User < ActiveRecord::Base
+      # Include default devise modules. Others available are:
+      # :confirmable, :lockable, :timeoutable and :omniauthable
+      devise :database_authenticatable, :registerable,
+             :recoverable, :rememberable, :trackable, :validatable
+             
+    belongs_to :meta, polymorphic: true 
+      
+    end
 
-###########################################3
-class Client < ActiveRecord::Base
-  has_one :user, as: :meta, dependent: :destroy
-  accepts_nested_attributes_for :user
+  ###########################################3
+  class Client < ActiveRecord::Base
+    has_one :user, as: :meta, dependent: :destroy
+    accepts_nested_attributes_for :user
+    
+    validates :name, presence: true
+    validates :phone, presence: true
   
-  validates :name, presence: true
-  validates :phone, presence: true
+  end
 
-end
-
-##########################################
-class Driver < ActiveRecord::Base
-  has_one :user, as: :meta, dependent: :destroy
-  accepts_nested_attributes_for :user
-  
-  validates :name, presence: true
-  validates :phone, presence: true
-validates :car_model presence: true
-end
+  ##########################################
+  class Driver < ActiveRecord::Base
+    has_one :user, as: :meta, dependent: :destroy
+    accepts_nested_attributes_for :user
+    
+    validates :name, presence: true
+    validates :phone, presence: true
+  validates :car_model presence: true
+  end
 
 ##########################################
 Controllers:
-#######################################
-/app/controllers/clients_controller.rb
-
-class ClientsController < ApplicationController
-  
-  #devise stuff
-  before_action :authenticate_user!, :authenticate_client, except: [:new, :create, :update, :show]
-  before_action :new_registration, only: [:new, :create]
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
-
-//auto-generates
-
-  private
-    # Callbacks:
-    
-    #Find
-    def set_client
-      @client = Client.find(params[:id])
-    end
-
-    # Strong parameters
-    def client_params
-      params.require(:client).permit(:name, :phone, user_attributes: [ :id, :email, :password, :password_confirmation ])
-    end
-    
-    def authenticate_client     
-      redirect_to(new_user_session_path) unless current_user.meta_type == "Client"  
-    end
-    
-    def new_registration
-      redirect_to(clients_path) if user_signed_in?
-    end
-    
-end
-
-#######################################
-/app/controllers/drivers_controller.rb
-
-class DriversController < ApplicationController
-  
-  #devise stuff
-  before_action :authenticate_user!, :authenticate_driver, except: [:new, :create, :update, :show]
-  before_action :new_registration, only: [:new, :create]
-  before_action :set_driver, only: [:show, :edit, :update, :destroy]
-
-  private
-    # Callbacks:
-    
-    #Find
-    def set_driver
-      @driver = Driver.find(params[:id])
-    end
-
-    # Strong parameters
-    def driver_params
-      params.require(:driver).permit(:name, :phone, :car_model, user_attributes: [ :id, :email, :password, :password_confirmation ])
-    end
-    
-    def authenticate_driver     
-      redirect_to(new_user_session_path) unless current_user.meta_type == "Driver"  
-    end
-    
-    def new_registration
-      redirect_to(drivers_path) if user_signed_in?
-    end
-    
-end
-
-###################################################
-Routes:
-
-  
-  devise_for :users, :skip => [:registrations]
-  resources :clients
-  resources :drivers
-  root 'welcome#index'
-
-#############################
+   #######################################
+   /app/controllers/clients_controller.rb
+   
+   class ClientsController < ApplicationController
+     
+     #devise stuff
+     before_action :authenticate_user!, :authenticate_client, except: [:new, :create, :update, :show]
+     before_action :new_registration, only: [:new, :create]
+     before_action :set_client, only: [:show, :edit, :update, :destroy]
+   
+   //auto-generates
+   
+     private
+       # Callbacks:
+       
+       #Find
+       def set_client
+         @client = Client.find(params[:id])
+       end
+   
+       # Strong parameters
+       def client_params
+         params.require(:client).permit(:name, :phone, user_attributes: [ :id, :email, :password, :password_confirmation ])
+       end
+       
+       def authenticate_client     
+         redirect_to(new_user_session_path) unless current_user.meta_type == "Client"  
+       end
+       
+       def new_registration
+         redirect_to(clients_path) if user_signed_in?
+       end
+       
+   end
+   
+   #######################################
+   /app/controllers/drivers_controller.rb
+   
+   class DriversController < ApplicationController
+     
+     #devise stuff
+     before_action :authenticate_user!, :authenticate_driver, except: [:new, :create, :update, :show]
+     before_action :new_registration, only: [:new, :create]
+     before_action :set_driver, only: [:show, :edit, :update, :destroy]
+   
+     private
+       # Callbacks:
+       
+       #Find
+       def set_driver
+         @driver = Driver.find(params[:id])
+       end
+   
+       # Strong parameters
+       def driver_params
+         params.require(:driver).permit(:name, :phone, :car_model, user_attributes: [ :id, :email, :password, :password_confirmation ])
+       end
+       
+       def authenticate_driver     
+         redirect_to(new_user_session_path) unless current_user.meta_type == "Driver"  
+       end
+       
+       def new_registration
+         redirect_to(drivers_path) if user_signed_in?
+       end
+       
+   end
+   
+   ###################################################
+   Routes:
+   
+     
+     devise_for :users, :skip => [:registrations]
+     resources :clients
+     resources :drivers
+     root 'welcome#index'
+   
+   #############################
 
 Dúvidas:
 /config/initializers/devise.rb (Scopes configuration)
